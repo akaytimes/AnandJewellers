@@ -161,7 +161,7 @@
 
   <script>
     // =========================================================
-    // PASTE YOUR TWO SUPABASE KEYS BELOW
+    // SUPABASE KEYS
     // =========================================================
     const SUPABASE_URL = 'https://utkzchhafikihonkeqlr.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_tMen2UT4d4NHM1TTWmb81g_hvbgr75y';
@@ -261,11 +261,43 @@
       e.preventDefault();
       const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
       const orderNumber = 'KSH-' + Math.floor(100000 + Math.random() * 900000);
-      const orderPayload = { order_number: orderNumber, customer_name: document.getElementById('custName').value, contact: document.getElementById('custContact').value, address: document.getElementById('custAddress').value, payment_mode: document.getElementById('custPayment').value, items: cart, total_amount: total, status: 'Confirmed' };
+      
+      const orderPayload = { 
+        order_number: orderNumber, 
+        customer_name: document.getElementById('custName').value, 
+        contact: document.getElementById('custContact').value, 
+        address: document.getElementById('custAddress').value, 
+        payment_mode: document.getElementById('custPayment').value, 
+        items: cart, 
+        total_amount: total, 
+        status: 'Confirmed' 
+      };
+
+      // 1. Save order to Supabase
       const { error } = await db.from('orders').insert([orderPayload]);
       if (error) return alert('Order Error: ' + error.message);
-      orders.unshift({ orderId: orderNumber, date: new Date().toLocaleDateString('en-IN'), customer: orderPayload.customer_name, address: orderPayload.address, payment: orderPayload.payment_mode, items: [...cart], total, status: 'Confirmed' });
-      cart = []; saveState(); e.target.reset(); openOrdersModal();
+
+      // 2. Mark sold items as out of stock (in_stock = false) in Supabase
+      for (const item of cart) {
+        await db.from('products').update({ in_stock: false }).eq('id', item.id);
+      }
+
+      orders.unshift({ 
+        orderId: orderNumber, 
+        date: new Date().toLocaleDateString('en-IN'), 
+        customer: orderPayload.customer_name, 
+        address: orderPayload.address, 
+        payment: orderPayload.payment_mode, 
+        items: [...cart], 
+        total, 
+        status: 'Confirmed' 
+      });
+
+      cart = []; 
+      saveState(); 
+      e.target.reset(); 
+      openOrdersModal();
+      loadCatalog(); // Reload catalog to instantly hide sold items!
     }
 
     function openOrdersModal() {
