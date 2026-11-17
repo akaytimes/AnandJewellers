@@ -24,7 +24,7 @@
     header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.98); border-bottom: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
     .nav-container { max-width: 1400px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     
-    .brand { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--maroon); letter-spacing: 0.12em; text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+    .brand { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--maroon); letter-spacing: 0.12em; text-decoration: none; display: flex; flex-direction: column; line-height: 1; cursor: pointer; }
     .brand span { font-family: var(--sans); font-size: 0.58rem; letter-spacing: 0.3em; color: var(--gold); margin-top: 4px; font-weight: 600; }
     
     /* Navigation Menu with Dropdowns */
@@ -111,9 +111,9 @@
     .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.95); background: #fff; width: 92%; max-width: 760px; max-height: 90vh; overflow-y: auto; z-index: 220; display: none; padding: 32px; border: 1px solid var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: transform 0.3s; }
     .modal.open { display: block; transform: translate(-50%,-50%) scale(1); }
     .modal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: center; }
-    .form-group { margin-bottom: 14px; }
-    .form-group label { display: block; font-size: 0.78rem; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05s; }
-    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); font-size: 0.9rem; }
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--maroon); }
+    .form-group input, .form-group select { width: 100%; padding: 9px; border: 1px solid var(--border); font-size: 0.88rem; border-radius: 4px; }
 
     /* Footer */
     footer { background: var(--maroon-dark); color: #F3E9DF; padding: 60px 24px 30px; margin-top: 60px; }
@@ -121,7 +121,7 @@
     .footer-col h4 { font-family: var(--serif); color: var(--gold-light); font-size: 1.25rem; margin-bottom: 16px; letter-spacing: 0.05em; }
     .footer-col ul { list-style: none; }
     .footer-col li { margin-bottom: 10px; font-size: 0.85rem; color: #d4cbc5; }
-    .footer-col a { color: #d4cbc5; text-decoration: none; transition: color 0.2s; }
+    .footer-col a { color: #d4cbc5; text-decoration: none; transition: color 0.2s; cursor: pointer; }
     .footer-col a:hover { color: var(--gold-light); }
     .footer-bottom { max-width: 1400px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.78rem; color: #ab9f97; gap: 14px; }
 
@@ -133,14 +133,14 @@
   <!-- Top Announcement Bar -->
   <div class="top-bar">
     <span>✨ Free Express Shipping on Orders Above ₹1,499</span>
-    <span>📞 WhatsApp Support: +91 87428 18004</span>
+    <span>📞 WhatsApp Support & Orders: +91 87428 18004</span>
     <span>💎 Certified 92.5 Sterling Silver & Temple Jewellery</span>
   </div>
 
   <!-- Header -->
   <header>
     <div class="nav-container">
-      <a href="#" class="brand" onclick="filterCategory('All', null); return false;">ANAND IMITATIONS<span>ROYAL FASHION & SILVER JEWELLERY</span></a>
+      <a class="brand" onclick="filterCategory('All', null); return false;">ANAND IMITATIONS<span>ROYAL FASHION & SILVER JEWELLERY</span></a>
       
       <!-- Multi-Category Navigation with Subcategory Dropdowns -->
       <nav>
@@ -245,7 +245,7 @@
     <div class="drawer-body" id="cartItems"></div>
     <div class="drawer-footer">
       <div style="display:flex; justify-content:space-between; margin-bottom:14px; font-weight:600;"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
-      <button class="btn-solid" style="width:100%; padding:14px;" onclick="openCheckoutModal()">Proceed to Order Collection</button>
+      <button class="btn-solid" style="width:100%; padding:14px;" onclick="openCheckoutModal()">Proceed to UPI Payment</button>
     </div>
   </aside>
 
@@ -261,18 +261,29 @@
     <div id="previewContent"></div>
   </div>
 
-  <!-- Checkout Modal -->
+  <!-- 7-Row Address & UPI QR Checkout Modal -->
   <div class="modal" id="checkoutModal">
-    <div style="display:flex; justify-content:space-between; margin-bottom:18px;">
-      <h3 style="font-family:var(--serif); font-size:1.8rem; color:var(--maroon);">Complete Your Order</h3>
+    <div style="display:flex; justify-content:space-between; margin-bottom:14px;">
+      <h3 style="font-family:var(--serif); font-size:1.6rem; color:var(--maroon);">Complete Delivery Address & UPI Payment</h3>
       <button class="icon-btn" onclick="closeAllOverlays()">✕</button>
     </div>
     <form id="checkoutForm" onsubmit="submitOrder(event)">
-      <div class="form-group"><label>Full Name</label><input type="text" id="custName" required placeholder="Ananya Sharma" /></div>
-      <div class="form-group"><label>Mobile Number (WhatsApp) & Email</label><input type="text" id="custContact" required placeholder="+91 87428 18004" /></div>
-      <div class="form-group"><label>Delivery Address & Pincode</label><input type="text" id="custAddress" required placeholder="42 Indiranagar 100ft Rd, Bengaluru 560038" /></div>
-      <div class="form-group"><label>Payment Mode</label><select id="custPayment"><option value="UPI / QR Instant">UPI / GPay / PhonePe</option><option value="Cash on Delivery">Cash on Delivery (COD)</option></select></div>
-      <button type="submit" id="placeOrderBtn" class="btn-solid" style="width:100%; padding:14px;">Confirm & Place Order</button>
+      <div class="form-group"><label>1. Full Name</label><input type="text" id="addrName" required placeholder="Ananya Sharma" /></div>
+      <div class="form-group"><label>2. WhatsApp Number</label><input type="tel" id="addrPhone" required placeholder="9876543210" /></div>
+      <div class="form-group"><label>3. House Number / Building Name</label><input type="text" id="addrHouse" required placeholder="Flat 402, Royal Palms Apartments" /></div>
+      <div class="form-group"><label>4. Area / Street / Colony</label><input type="text" id="addrArea" required placeholder="100ft Road, Indiranagar" /></div>
+      <div class="form-group"><label>5. Nearby Landmark</label><input type="text" id="addrLandmark" required placeholder="Near Metro Station / Temple" /></div>
+      <div class="form-group"><label>6. Pin Code</label><input type="text" id="addrPincode" required placeholder="560038" /></div>
+      <div class="form-group"><label>7. City</label><input type="text" id="addrCity" required placeholder="Bengaluru" /></div>
+      
+      <div style="background:var(--cream); padding:14px; border:1px solid var(--border); margin:14px 0; text-align:center;">
+        <p style="font-size:0.82rem; font-weight:600; color:var(--maroon); margin-bottom:8px;">Scan QR Code to Pay via Any UPI App (GPay / PhonePe / Paytm)</p>
+        <!-- Sample UPI QR Code placeholder linked to business UPI / WhatsApp -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=8742818004@paytm&pn=Anand%20Imitations&cu=INR" alt="UPI QR Code" style="width:140px; height:140px; margin-bottom:8px; border:1px solid var(--border);" />
+        <p style="font-size:0.75rem; color:var(--muted);">UPI ID: <strong>8742818004@paytm</strong></p>
+      </div>
+
+      <button type="submit" id="placeOrderBtn" class="btn-solid" style="width:100%; padding:14px;">Confirm & Pay via UPI (Send WhatsApp Confirmation)</button>
     </form>
   </div>
 
@@ -283,10 +294,10 @@
       <button class="icon-btn" onclick="closeAllOverlays()">✕</button>
     </div>
     <div style="background:var(--cream); padding:16px; margin-bottom:20px; border:1px solid var(--border);">
-      <p style="font-size:0.85rem; font-weight:600; color:var(--maroon);">Anand Imitations Account Member</p>
-      <p style="font-size:0.8rem; color:var(--muted);">Helpline / WhatsApp: +91 87428 18004</p>
+      <p style="font-size:0.85rem; font-weight:600; color:var(--maroon);">Anand Imitations Member Account</p>
+      <p style="font-size:0.8rem; color:var(--muted);">WhatsApp Helpline: +91 87428 18004</p>
     </div>
-    <h4 style="font-size:1rem; margin-bottom:10px; font-family:var(--serif); color:var(--maroon);">Your Order History</h4>
+    <h4 style="font-size:1rem; margin-bottom:10px; font-family:var(--serif); color:var(--maroon);">Your Order History & Status</h4>
     <div id="ordersList"></div>
   </div>
 
@@ -325,7 +336,7 @@
     </div>
     <div class="footer-bottom">
       <p>© 2026 Anand Imitations. All Rights Reserved.</p>
-      <p>Secure SSL Encrypted Transactions & Automated Inventory Control</p>
+      <p>Secure SSL Encrypted UPI Transactions & Automated Inventory Control</p>
     </div>
   </footer>
 
@@ -548,20 +559,33 @@
       const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
       const orderNumber = 'ANAND-' + Math.floor(100000 + Math.random() * 900000);
       
+      // Collect 7 rows of address details
+      const name = document.getElementById('addrName').value;
+      const phone = document.getElementById('addrPhone').value;
+      const house = document.getElementById('addrHouse').value;
+      const area = document.getElementById('addrArea').value;
+      const landmark = document.getElementById('addrLandmark').value;
+      const pincode = document.getElementById('addrPincode').value;
+      const city = document.getElementById('addrCity').value;
+
+      const fullAddressString = `${house}, ${area}, Landmark: ${landmark}, ${city} - ${pincode}`;
+
       const orderPayload = { 
         order_number: orderNumber, 
-        customer_name: document.getElementById('custName').value, 
-        contact: document.getElementById('custContact').value, 
-        address: document.getElementById('custAddress').value, 
-        payment_mode: document.getElementById('custPayment').value, 
+        customer_name: name, 
+        contact: phone, 
+        address: fullAddressString, 
+        payment_mode: 'UPI QR Payment', 
         items: cart, 
         total_amount: total, 
-        status: 'Confirmed' 
+        status: 'Awaiting UPI Screenshot / Confirmed' 
       };
 
+      // 1. Insert order into Supabase
       const { error } = await db.from('orders').insert([orderPayload]);
       if (error) return alert('Order Error: ' + error.message);
 
+      // 2. Mark sold 1-of-1 items as out of stock in Supabase
       for (const item of cart) {
         await db.from('products').update({ in_stock: false }).eq('id', item.id);
       }
@@ -569,18 +593,33 @@
       orders.unshift({ 
         orderId: orderNumber, 
         date: new Date().toLocaleDateString('en-IN'), 
-        customer: orderPayload.customer_name, 
-        address: orderPayload.address, 
-        payment: orderPayload.payment_mode, 
+        customer: name, 
+        address: fullAddressString, 
+        payment: 'UPI QR Payment', 
         items: [...cart], 
         total, 
-        status: 'Confirmed' 
+        status: 'Awaiting Payment Verification' 
       });
 
+      // 3. Prepare pre-filled WhatsApp message to +91 8742818004
+      const itemsListText = cart.map(i => `• ${i.title} (Qty: ${i.qty}) - ₹${i.price * i.qty}`).join('%0A');
+      const whatsappMessage = `*New Order Placed - Anand Imitations*%0A%0A*Order ID:* ${orderNumber}%0A*Name:* ${name}%0A*WhatsApp:* ${phone}%0A*Delivery Address:*%0A${house}%0A${area}%0ALandmark: ${landmark}%0A${city} - ${pincode}%0A%0A*Items:*%0A${itemsListText}%0A%0A*Total Amount:* ₹${total.toLocaleString('en-IN')}%0A*Payment Status:* Paid via UPI QR / Pending Screenshot%0A%0A_Estimated Delivery: 3-5 Business Days_`;
+
+      const whatsappUrl = `https://wa.me/918742818004?text=${whatsappMessage}`;
+
+      // Reset cart and state
       cart = []; 
       saveState(); 
       e.target.reset(); 
+      closeAllOverlays();
+
+      // Open WhatsApp pre-filled chat
+      window.open(whatsappUrl, '_blank');
+
+      // Open customer profile/orders modal to show success message and estimate delivery
       openProfileModal();
+      alert(`Order #${orderNumber} successfully placed! Estimated Delivery: 3-5 Business Days. Please send your payment screenshot on WhatsApp.`);
+      
       loadCatalog();
     }
 
@@ -588,7 +627,7 @@
       closeAllOverlays();
       const list = document.getElementById('ordersList');
       if (orders.length === 0) {
-        list.innerHTML = `<p style="font-size:0.85rem; color:var(--muted);">No orders placed yet. Place your first test order to track it here!</p>`;
+        list.innerHTML = `<p style="font-size:0.85rem; color:var(--muted);">No orders placed yet. Place your first order to track it here!</p>`;
       } else {
         list.innerHTML = orders.map(o => `
           <div style="border:1px solid var(--border); padding:14px; margin-bottom:12px; background:var(--cream); border-radius:4px;">
@@ -597,7 +636,8 @@
               <span style="color:var(--maroon); font-weight:600;">₹${o.total.toLocaleString('en-IN')}</span>
             </div>
             <p style="font-size:0.8rem; color:var(--muted);">Status: <span style="color:green; font-weight:600;">${o.status}</span> • Date: ${o.date}</p>
-            <p style="font-size:0.8rem; color:var(--muted);">Ship to: ${o.customer}, ${o.address}</p>
+            <p style="font-size:0.8rem; color:var(--muted);">Delivery Address: ${o.address}</p>
+            <p style="font-size:0.8rem; color:var(--gold); font-weight:600; margin-top:4px;">Estimated Delivery: 3-5 Business Days 📦</p>
           </div>`).join('');
       }
       document.getElementById('overlay').classList.add('open');
