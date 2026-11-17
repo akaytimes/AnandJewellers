@@ -278,12 +278,11 @@
       
       <div style="background:var(--cream); padding:14px; border:1px solid var(--border); margin:14px 0; text-align:center;">
         <p style="font-size:0.82rem; font-weight:600; color:var(--maroon); margin-bottom:8px;">Scan QR Code to Pay via Any UPI App (GPay / PhonePe / Paytm)</p>
-        <!-- Sample UPI QR Code placeholder linked to business UPI / WhatsApp -->
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=8742818004@paytm&pn=Anand%20Imitations&cu=INR" alt="UPI QR Code" style="width:140px; height:140px; margin-bottom:8px; border:1px solid var(--border);" />
         <p style="font-size:0.75rem; color:var(--muted);">UPI ID: <strong>8742818004@paytm</strong></p>
       </div>
 
-      <button type="submit" id="placeOrderBtn" class="btn-solid" style="width:100%; padding:14px;">Confirm & Pay via UPI (Send WhatsApp Confirmation)</button>
+      <button type="submit" id="placeOrderBtn" class="btn-solid" style="width:100%; padding:14px;">Confirm & Pay via UPI</button>
     </form>
   </div>
 
@@ -559,7 +558,6 @@
       const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
       const orderNumber = 'ANAND-' + Math.floor(100000 + Math.random() * 900000);
       
-      // Collect 7 rows of address details
       const name = document.getElementById('addrName').value;
       const phone = document.getElementById('addrPhone').value;
       const house = document.getElementById('addrHouse').value;
@@ -578,14 +576,17 @@
         payment_mode: 'UPI QR Payment', 
         items: cart, 
         total_amount: total, 
-        status: 'Awaiting UPI Screenshot / Confirmed' 
+        status: 'Awaiting UPI Screenshot' 
       };
 
       // 1. Insert order into Supabase
       const { error } = await db.from('orders').insert([orderPayload]);
-      if (error) return alert('Order Error: ' + error.message);
+      if (error) {
+        alert('Database Error: ' + error.message + '\n(Tip: Check Supabase RLS Policies for the orders table)');
+        return;
+      }
 
-      // 2. Mark sold 1-of-1 items as out of stock in Supabase
+      // 2. Mark items as out of stock in Supabase
       for (const item of cart) {
         await db.from('products').update({ in_stock: false }).eq('id', item.id);
       }
@@ -601,25 +602,31 @@
         status: 'Awaiting Payment Verification' 
       });
 
-      // 3. Prepare pre-filled WhatsApp message to +91 8742818004
-      const itemsListText = cart.map(i => `• ${i.title} (Qty: ${i.qty}) - ₹${i.price * i.qty}`).join('%0A');
-      const whatsappMessage = `*New Order Placed - Anand Imitations*%0A%0A*Order ID:* ${orderNumber}%0A*Name:* ${name}%0A*WhatsApp:* ${phone}%0A*Delivery Address:*%0A${house}%0A${area}%0ALandmark: ${landmark}%0A${city} - ${pincode}%0A%0A*Items:*%0A${itemsListText}%0A%0A*Total Amount:* ₹${total.toLocaleString('en-IN')}%0A*Payment Status:* Paid via UPI QR / Pending Screenshot%0A%0A_Estimated Delivery: 3-5 Business Days_`;
+      // 3. Prepare WhatsApp URL
+      const itemsListText = cart.map(i => `• ${i.title} (Qty: ${i.qty}) - ₹${i.price * i.qty}`).join('\n');
+      const whatsappMessage = `*New Order Placed - Anand Imitations*\n\n*Order ID:* ${orderNumber}\n*Name:* ${name}\n*WhatsApp:* ${phone}\n*Delivery Address:* ${fullAddressString}\n\n*Items:*\n${itemsListText}\n\n*Total Amount:* ₹${total.toLocaleString('en-IN')}\n*Payment Status:* Paid via UPI QR / Please find screenshot attached.`;
+      const whatsappUrl = `https://wa.me/918742818004?text=` + encodeURIComponent(whatsappMessage);
 
-      const whatsappUrl = `https://wa.me/918742818004?text=${whatsappMessage}`;
-
-      // Reset cart and state
       cart = []; 
       saveState(); 
       e.target.reset(); 
       closeAllOverlays();
 
-      // Open WhatsApp pre-filled chat
-      window.open(whatsappUrl, '_blank');
+      // Show success modal with a guaranteed clickable WhatsApp button
+      document.getElementById('ordersList').innerHTML = `
+        <div style="border:1px solid var(--gold); padding:18px; background:var(--cream); text-align:center; border-radius:4px; margin-bottom:14px;">
+          <h4 style="color:var(--maroon); font-family:var(--serif); font-size:1.4rem; margin-bottom:8px;">Order #${orderNumber} Placed Successfully! 🎉</h4>
+          <p style="font-size:0.85rem; margin-bottom:12px;">Estimated Delivery: <strong>3-5 Business Days</strong></p>
+          <p style="font-size:0.82rem; color:var(--muted); margin-bottom:16px;">Please click below to send your payment confirmation & order details to our WhatsApp (+91 87428 18004):</p>
+          <a href="${whatsappUrl}" target="_blank" class="btn-solid" style="display:inline-block; text-decoration:none; padding:12px 24px; background:#25D366; color:#fff; font-weight:600; border-radius:4px;">📲 Send Order Details on WhatsApp</a>
+        </div>
+      ` + orders.slice(1).map(o => `
+        <div style="border:1px solid var(--border); padding:14px; margin-top:12px; background:var(--cream);">
+          <strong>Order #${o.orderId}</strong> — ₹${o.total.toLocaleString('en-IN')} (${o.status})<br><small>${o.customer} • ${o.address}</small>
+        </div>`).join('');
 
-      // Open customer profile/orders modal to show success message and estimate delivery
-      openProfileModal();
-      alert(`Order #${orderNumber} successfully placed! Estimated Delivery: 3-5 Business Days. Please send your payment screenshot on WhatsApp.`);
-      
+      document.getElementById('overlay').classList.add('open');
+      document.getElementById('profileModal').classList.add('open');
       loadCatalog();
     }
 
