@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KUSHAL'S | Fashion & Silver Jewellery Storefront</title>
+  <title>ANAND IMITATIONS | Royal Fashion & Silver Jewellery</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -15,103 +15,216 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--sans); background: var(--cream); color: var(--text); line-height: 1.5; }
-    .top-bar { background: var(--maroon-dark); color: var(--gold-light); text-align: center; font-size: 0.78rem; letter-spacing: 0.08em; padding: 8px 16px; text-transform: uppercase; }
-    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.96); border-bottom: 1px solid var(--border); }
-    .nav-container { max-width: 1360px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .brand { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--maroon); letter-spacing: 0.14em; text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
-    .brand span { font-family: var(--sans); font-size: 0.62rem; letter-spacing: 0.28em; color: var(--gold); margin-top: 3px; }
-    nav ul { display: flex; list-style: none; gap: 26px; }
-    nav a { text-decoration: none; color: var(--text); font-size: 0.85rem; font-weight: 500; text-transform: uppercase; cursor: pointer; }
-    nav a:hover, nav a.active { color: var(--maroon); border-bottom: 2px solid var(--gold); padding-bottom: 4px; }
-    .nav-actions { display: flex; align-items: center; gap: 16px; }
-    .search-box { border: 1px solid var(--border); border-radius: 99px; padding: 6px 14px; font-size: 0.85rem; background: var(--cream); width: 200px; }
-    .icon-btn { background: none; border: none; cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--maroon); display: flex; align-items: center; gap: 6px; padding: 6px 10px; }
-    .badge { background: var(--maroon); color: #fff; font-size: 0.7rem; padding: 2px 6px; border-radius: 99px; }
-    .hero { min-height: 460px; background: linear-gradient(95deg, rgba(59,9,16,0.92) 0%, rgba(88,17,26,0.78) 55%, rgba(197,155,95,0.25) 100%), url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; color: #fff; display: flex; align-items: center; padding: 60px 24px; }
-    .hero-inner { max-width: 1360px; margin: 0 auto; width: 100%; }
-    .hero-tag { color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.8rem; margin-bottom: 12px; display: block; }
-    .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.2rem); font-weight: 600; line-height: 1.08; max-width: 650px; margin-bottom: 18px; }
-    .hero p { max-width: 500px; color: #F3E9DF; margin-bottom: 28px; }
-    .btn-primary { background: var(--gold); color: var(--maroon-dark); border: none; padding: 14px 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.82rem; cursor: pointer; }
-    .section { max-width: 1360px; margin: 0 auto; padding: 48px 24px; }
+    
+    /* Top Announcement Bar */
+    .top-bar { background: var(--maroon-dark); color: var(--gold-light); text-align: center; font-size: 0.78rem; letter-spacing: 0.08em; padding: 8px 16px; text-transform: uppercase; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .top-bar span { display: inline-flex; align-items: center; gap: 6px; }
+
+    /* Header & Navigation */
+    header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.98); border-bottom: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .nav-container { max-width: 1400px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    
+    .brand { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--maroon); letter-spacing: 0.12em; text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+    .brand span { font-family: var(--sans); font-size: 0.58rem; letter-spacing: 0.3em; color: var(--gold); margin-top: 4px; font-weight: 600; }
+    
+    /* Navigation Menu with Dropdowns */
+    nav ul { display: flex; list-style: none; gap: 22px; align-items: center; }
+    nav li { position: relative; }
+    nav a { text-decoration: none; color: var(--text); font-size: 0.82rem; font-weight: 500; text-transform: uppercase; cursor: pointer; padding: 10px 0; display: inline-flex; align-items: center; gap: 4px; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: var(--maroon); }
+    
+    /* Dropdown Mega Menu */
+    .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: #fff; min-width: 220px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--border); padding: 12px 0; z-index: 150; }
+    nav li:hover .dropdown-content { display: block; }
+    .dropdown-content a { display: block; padding: 8px 20px; font-size: 0.78rem; text-transform: none; color: var(--text); font-weight: 400; border-bottom: none !important; }
+    .dropdown-content a:hover { background: var(--cream); color: var(--maroon); padding-left: 24px; }
+
+    /* Action Icons */
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .search-box { border: 1px solid var(--border); border-radius: 99px; padding: 6px 14px; font-size: 0.82rem; background: var(--cream); width: 180px; transition: width 0.3s; }
+    .search-box:focus { width: 240px; outline: none; border-color: var(--gold); }
+    .icon-btn { background: none; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--maroon); display: flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 4px; transition: background 0.2s; }
+    .icon-btn:hover { background: var(--cream); }
+    .badge { background: var(--maroon); color: #fff; font-size: 0.68rem; padding: 2px 6px; border-radius: 99px; }
+
+    /* Hero Section */
+    .hero { min-height: 480px; background: linear-gradient(95deg, rgba(59,9,16,0.92) 0%, rgba(88,17,26,0.78) 55%, rgba(197,155,95,0.25) 100%), url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; color: #fff; display: flex; align-items: center; padding: 60px 24px; }
+    .hero-inner { max-width: 1400px; margin: 0 auto; width: 100%; }
+    .hero-tag { color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.78rem; margin-bottom: 12px; display: block; font-weight: 600; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 600; line-height: 1.08; max-width: 650px; margin-bottom: 18px; }
+    .hero p { max-width: 500px; color: #F3E9DF; margin-bottom: 28px; font-size: 0.95rem; }
+    .btn-primary { background: var(--gold); color: var(--maroon-dark); border: none; padding: 14px 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.82rem; cursor: pointer; transition: background 0.2s; }
+    .btn-primary:hover { background: #d4ab6e; }
+
+    /* Catalog Section & Toolbar */
+    .section { max-width: 1400px; margin: 0 auto; padding: 48px 24px; }
+    .section-title { font-family: var(--serif); font-size: 2rem; color: var(--maroon); margin-bottom: 8px; text-align: center; }
+    .section-subtitle { text-align: center; color: var(--muted); font-size: 0.88rem; margin-bottom: 32px; text-transform: uppercase; letter-spacing: 0.1em; }
+    
     .toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
     .filter-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .pill { padding: 7px 16px; border: 1px solid var(--border); background: #fff; border-radius: 99px; font-size: 0.8rem; cursor: pointer; }
+    .pill { padding: 7px 16px; border: 1px solid var(--border); background: #fff; border-radius: 99px; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; }
     .pill.active, .pill:hover { background: var(--maroon); color: #fff; border-color: var(--maroon); }
-    select.sort-select { padding: 8px 14px; border: 1px solid var(--border); background: #fff; }
+    select.sort-select { padding: 8px 14px; border: 1px solid var(--border); background: #fff; font-size: 0.82rem; border-radius: 4px; }
+
+    /* Product Grid */
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 26px; }
-    .product-card { background: var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; }
+    .product-card { background: var(--surface); border: 1px solid var(--border); display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; position: relative; }
+    .product-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
     .product-media { position: relative; aspect-ratio: 4/5; overflow: hidden; background: #F4EFE8; cursor: pointer; }
-    .product-media img { width: 100%; height: 100%; object-fit: cover; }
-    .tag-badge { position: absolute; top: 12px; left: 12px; background: var(--maroon); color: #fff; font-size: 0.68rem; padding: 4px 9px; text-transform: uppercase; }
+    .product-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .product-card:hover .product-media img { transform: scale(1.04); }
+    .tag-badge { position: absolute; top: 12px; left: 12px; background: var(--maroon); color: #fff; font-size: 0.65rem; padding: 4px 9px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+    
+    /* Wishlist Heart Button on Card */
+    .wishlist-btn { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.85); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1rem; color: #888; transition: color 0.2s, background 0.2s; }
+    .wishlist-btn.active { color: #d90429; background: #fff; }
+
     .product-info { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .product-meta { font-size: 0.72rem; color: var(--gold); text-transform: uppercase; font-weight: 600; }
-    .product-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; margin: 4px 0 8px; }
+    .product-meta { font-size: 0.7rem; color: var(--gold); text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; }
+    .product-title { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; margin: 4px 0 8px; color: var(--text); }
     .price-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-    .price { font-weight: 600; color: var(--maroon); }
-    .mrp { text-decoration: line-through; color: var(--muted); font-size: 0.85rem; }
+    .price { font-weight: 600; color: var(--maroon); font-size: 1.05rem; }
+    .mrp { text-decoration: line-through; color: var(--muted); font-size: 0.82rem; }
     .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .btn-outline { border: 1px solid var(--maroon); background: transparent; color: var(--maroon); padding: 9px; font-size: 0.76rem; font-weight: 600; text-transform: uppercase; cursor: pointer; }
-    .btn-solid { border: 1px solid var(--maroon); background: var(--maroon); color: #fff; padding: 9px; font-size: 0.76rem; font-weight: 600; text-transform: uppercase; cursor: pointer; }
-    .overlay { position: fixed; inset: 0; background: rgba(20,8,10,0.55); display: none; z-index: 200; }
+    .btn-outline { border: 1px solid var(--maroon); background: transparent; color: var(--maroon); padding: 9px; font-size: 0.74rem; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .btn-outline:hover { background: var(--cream); }
+    .btn-solid { border: 1px solid var(--maroon); background: var(--maroon); color: #fff; padding: 9px; font-size: 0.74rem; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .btn-solid:hover { background: var(--maroon-dark); }
+
+    /* Drawers & Modals Overlays */
+    .overlay { position: fixed; inset: 0; background: rgba(20,8,10,0.55); display: none; z-index: 200; backdrop-filter: blur(2px); }
     .overlay.open { display: block; }
-    .drawer { position: fixed; top: 0; right: -440px; width: 100%; max-width: 420px; height: 100vh; background: #fff; z-index: 210; transition: right 0.3s ease; display: flex; flex-direction: column; }
+    
+    .drawer { position: fixed; top: 0; right: -440px; width: 100%; max-width: 420px; height: 100vh; background: #fff; z-index: 210; transition: right 0.3s ease; display: flex; flex-direction: column; box-shadow: -5px 0 25px rgba(0,0,0,0.15); }
     .drawer.open { right: 0; }
     .drawer-header, .drawer-footer { padding: 20px; background: var(--cream); border-bottom: 1px solid var(--border); }
     .drawer-header { display: flex; justify-content: space-between; align-items: center; }
     .drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
-    .cart-item { display: flex; gap: 14px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
+    
+    .cart-item { display: flex; gap: 14px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--border); align-items: center; }
     .cart-item img { width: 68px; height: 82px; object-fit: cover; }
     .qty-controls { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
-    .qty-btn { width: 24px; height: 24px; border: 1px solid var(--border); background: #fff; cursor: pointer; }
-    .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #fff; width: 92%; max-width: 760px; max-height: 90vh; overflow-y: auto; z-index: 220; display: none; padding: 28px; border: 1px solid var(--gold); }
-    .modal.open { display: block; }
-    .modal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; align-items: center; }
+    .qty-btn { width: 24px; height: 24px; border: 1px solid var(--border); background: #fff; cursor: pointer; font-weight: bold; }
+
+    /* Modals */
+    .modal { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.95); background: #fff; width: 92%; max-width: 760px; max-height: 90vh; overflow-y: auto; z-index: 220; display: none; padding: 32px; border: 1px solid var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: transform 0.3s; }
+    .modal.open { display: block; transform: translate(-50%,-50%) scale(1); }
+    .modal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: center; }
     .form-group { margin-bottom: 14px; }
-    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
-    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); }
-    @media (max-width: 820px) { nav { display: none; } }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05s; }
+    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid var(--border); font-size: 0.9rem; }
+
+    /* Footer */
+    footer { background: var(--maroon-dark); color: #F3E9DF; padding: 60px 24px 30px; margin-top: 60px; }
+    .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 40px; }
+    .footer-col h4 { font-family: var(--serif); color: var(--gold-light); font-size: 1.25rem; margin-bottom: 16px; letter-spacing: 0.05em; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; font-size: 0.85rem; color: #d4cbc5; }
+    .footer-col a { color: #d4cbc5; text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold-light); }
+    .footer-bottom { max-width: 1400px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; font-size: 0.78rem; color: #ab9f97; gap: 14px; }
+
+    @media (max-width: 900px) { nav { display: none; } }
   </style>
 </head>
 <body>
-  <div class="top-bar">Free Express Shipping Across India on Orders Above ₹1,499 | 92.5 Hallmarked Sterling Silver</div>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <span>✨ Free Express Shipping on Orders Above ₹1,499</span>
+    <span>📞 WhatsApp Support: +91 87428 18004</span>
+    <span>💎 Certified 92.5 Sterling Silver & Temple Jewellery</span>
+  </div>
+
+  <!-- Header -->
   <header>
     <div class="nav-container">
-      <a href="#" class="brand">KUSHAL'S<span>FASHION & SILVER JEWELLERY</span></a>
+      <a href="#" class="brand" onclick="filterCategory('All', null); return false;">ANAND IMITATIONS<span>ROYAL FASHION & SILVER JEWELLERY</span></a>
+      
+      <!-- Multi-Category Navigation with Subcategory Dropdowns -->
       <nav>
         <ul>
-          <li><a class="active" onclick="filterCategory('All', this)">All Collections</a></li>
-          <li><a onclick="filterCategory('Antique', this)">Antique Bridal</a></li>
-          <li><a onclick="filterCategory('Kundan', this)">Kundan & Polki</a></li>
-          <li><a onclick="filterCategory('92.5 Silver', this)">92.5 Silver</a></li>
-          <li><a onclick="filterCategory('Zircon', this)">Zircon</a></li>
+          <li><a class="active" onclick="filterCategory('All', this)">Home</a></li>
+          
+          <!-- Necklace Dropdown -->
+          <li>
+            <a onclick="filterCategory('Necklace', this)">Necklace ▾</a>
+            <div class="dropdown-content">
+              <a onclick="filterSubCategory('Temple Choker')">Temple Choker Sets</a>
+              <a onclick="filterSubCategory('Long Haram')">Antique Long Harams</a>
+              <a onclick="filterSubCategory('Kundan Necklace')">Kundan & Polki Sets</a>
+              <a onclick="filterSubCategory('Layered Necklace')">Layered Necklace</a>
+            </div>
+          </li>
+
+          <!-- Earrings Dropdown -->
+          <li>
+            <a onclick="filterCategory('Earrings', this)">Earrings ▾</a>
+            <div class="dropdown-content">
+              <a onclick="filterSubCategory('Jhumkas')">Traditional Jhumkas</a>
+              <a onclick="filterSubCategory('Chandbalis')">Rajwada Chandbalis</a>
+              <a onclick="filterSubCategory('Studs')">Designer Stone Studs</a>
+              <a onclick="filterSubCategory('Hoops')">Statement Hoops</a>
+            </div>
+          </li>
+
+          <!-- 92.5 Silver Dropdown -->
+          <li>
+            <a onclick="filterCategory('92.5 Silver', this)">92.5 Silver ▾</a>
+            <div class="dropdown-content">
+              <a onclick="filterSubCategory('Silver Necklace')">Silver Nakshi Necklaces</a>
+              <a onclick="filterSubCategory('Silver Bangles')">Oxidized Bangles</a>
+              <a onclick="filterSubCategory('Silver Earrings')">Temple Silver Jhumka</a>
+            </div>
+          </li>
+
+          <li><a onclick="filterCategory('Rings', this)">Rings</a></li>
+          <li><a onclick="filterCategory('Bracelet', this)">Bracelet</a></li>
+          <li><a onclick="filterCategory('Mangalsutra', this)">Mangalsutra</a></li>
+          <li><a onclick="filterCategory('Kada', this)">Kada</a></li>
+          <li><a onclick="filterCategory('Anklet', this)">Anklet</a></li>
+          <li><a onclick="filterCategory('Chain', this)">Chain</a></li>
         </ul>
       </nav>
+
+      <!-- Action Buttons in Header -->
       <div class="nav-actions">
         <input type="text" id="searchInput" class="search-box" placeholder="Search jewellery..." oninput="renderProducts()" />
-        <button class="icon-btn" onclick="openOrdersModal()">Orders (<span id="orderCount">0</span>)</button>
-        <button class="icon-btn" onclick="toggleCart(true)">Bag <span class="badge" id="cartCount">0</span></button>
+        <button class="icon-btn" onclick="openProfileModal()" title="Customer Profile & Orders">👤 Profile (<span id="orderCount">0</span>)</button>
+        <button class="icon-btn" onclick="openWishlistDrawer()" title="Wishlist">♥ Wishlist <span class="badge" id="wishlistCount">0</span></button>
+        <button class="icon-btn" onclick="toggleCart(true)" title="Shopping Bag">Bag <span class="badge" id="cartCount">0</span></button>
       </div>
     </div>
   </header>
 
+  <!-- Hero Section -->
   <section class="hero">
     <div class="hero-inner">
-      <span class="hero-tag">The Royal Heritage Edit • 2026</span>
+      <span class="hero-tag">The Royal Heritage Edit • Anand Imitations</span>
       <h1>Handcrafted Temple & Bridal Splendour</h1>
-      <p>Heirloom-inspired Nakshi craftsmanship, radiant uncut Kundan, and certified 92.5 Sterling Silver.</p>
-      <button class="btn-primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Explore Collection</button>
+      <p>Heirloom-inspired Nakshi craftsmanship, radiant uncut Kundan, Zircon solitaires, and certified 92.5 Sterling Silver collections.</p>
+      <button class="btn-primary" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Explore Collections</button>
     </div>
   </section>
 
+  <!-- Product Catalog Section -->
   <section class="section" id="catalog">
+    <h2 class="section-title" id="catalogTitle">Curated Royal Collections</h2>
+    <p class="section-subtitle">Exquisite handcrafted pieces designed for modern royalty</p>
+
     <div class="toolbar">
-      <div class="filter-pills">
+      <div class="filter-pills" id="filterPillsContainer">
         <button class="pill active" onclick="filterCategory('All', this)">All Pieces</button>
-        <button class="pill" onclick="filterCategory('Antique', this)">Antique</button>
-        <button class="pill" onclick="filterCategory('Kundan', this)">Kundan</button>
+        <button class="pill" onclick="filterCategory('Necklace', this)">Necklace</button>
+        <button class="pill" onclick="filterCategory('Earrings', this)">Earrings</button>
         <button class="pill" onclick="filterCategory('92.5 Silver', this)">92.5 Silver</button>
-        <button class="pill" onclick="filterCategory('Zircon', this)">Zircon</button>
+        <button class="pill" onclick="filterCategory('Rings', this)">Rings</button>
+        <button class="pill" onclick="filterCategory('Bracelet', this)">Bracelet</button>
+        <button class="pill" onclick="filterCategory('Mangalsutra', this)">Mangalsutra</button>
+        <button class="pill" onclick="filterCategory('Kada', this)">Kada</button>
+        <button class="pill" onclick="filterCategory('Anklet', this)">Anklet</button>
+        <button class="pill" onclick="filterCategory('Chain', this)">Chain</button>
       </div>
       <select id="sortSelect" class="sort-select" onchange="renderProducts()">
         <option value="featured">Sort: Featured</option>
@@ -119,10 +232,14 @@
         <option value="high">Price: High to Low</option>
       </select>
     </div>
+
     <div class="product-grid" id="productGrid"><p>Loading live jewellery catalog...</p></div>
   </section>
 
+  <!-- Overlays & Drawers -->
   <div class="overlay" id="overlay" onclick="closeAllOverlays()"></div>
+
+  <!-- Shopping Bag Drawer -->
   <aside class="drawer" id="cartDrawer">
     <div class="drawer-header"><h3>Your Shopping Bag</h3><button class="icon-btn" onclick="closeAllOverlays()">✕</button></div>
     <div class="drawer-body" id="cartItems"></div>
@@ -132,11 +249,19 @@
     </div>
   </aside>
 
+  <!-- Wishlist Drawer -->
+  <aside class="drawer" id="wishlistDrawer">
+    <div class="drawer-header"><h3>My Wishlist ♥</h3><button class="icon-btn" onclick="closeAllOverlays()">✕</button></div>
+    <div class="drawer-body" id="wishlistItems"></div>
+  </aside>
+
+  <!-- Quick View Modal -->
   <div class="modal" id="previewModal">
-    <div style="text-align:right;"><button class="icon-btn" onclick="closeAllOverlays()">✕ Close</button></div>
+    <div style="text-align:right; margin-bottom: 10px;"><button class="icon-btn" onclick="closeAllOverlays()">✕ Close</button></div>
     <div id="previewContent"></div>
   </div>
 
+  <!-- Checkout Modal -->
   <div class="modal" id="checkoutModal">
     <div style="display:flex; justify-content:space-between; margin-bottom:18px;">
       <h3 style="font-family:var(--serif); font-size:1.8rem; color:var(--maroon);">Complete Your Order</h3>
@@ -144,38 +269,84 @@
     </div>
     <form id="checkoutForm" onsubmit="submitOrder(event)">
       <div class="form-group"><label>Full Name</label><input type="text" id="custName" required placeholder="Ananya Sharma" /></div>
-      <div class="form-group"><label>Mobile Number & Email</label><input type="text" id="custContact" required placeholder="+91 98765 43210" /></div>
+      <div class="form-group"><label>Mobile Number (WhatsApp) & Email</label><input type="text" id="custContact" required placeholder="+91 87428 18004" /></div>
       <div class="form-group"><label>Delivery Address & Pincode</label><input type="text" id="custAddress" required placeholder="42 Indiranagar 100ft Rd, Bengaluru 560038" /></div>
       <div class="form-group"><label>Payment Mode</label><select id="custPayment"><option value="UPI / QR Instant">UPI / GPay / PhonePe</option><option value="Cash on Delivery">Cash on Delivery (COD)</option></select></div>
       <button type="submit" id="placeOrderBtn" class="btn-solid" style="width:100%; padding:14px;">Confirm & Place Order</button>
     </form>
   </div>
 
-  <div class="modal" id="ordersModal">
+  <!-- Customer Profile & Orders Modal -->
+  <div class="modal" id="profileModal">
     <div style="display:flex; justify-content:space-between; margin-bottom:16px;">
-      <h3 style="font-family:var(--serif); font-size:1.8rem; color:var(--maroon);">Order Collection</h3>
+      <h3 style="font-family:var(--serif); font-size:1.8rem; color:var(--maroon);">Customer Profile & Orders</h3>
       <button class="icon-btn" onclick="closeAllOverlays()">✕</button>
     </div>
+    <div style="background:var(--cream); padding:16px; margin-bottom:20px; border:1px solid var(--border);">
+      <p style="font-size:0.85rem; font-weight:600; color:var(--maroon);">Anand Imitations Account Member</p>
+      <p style="font-size:0.8rem; color:var(--muted);">Helpline / WhatsApp: +91 87428 18004</p>
+    </div>
+    <h4 style="font-size:1rem; margin-bottom:10px; font-family:var(--serif); color:var(--maroon);">Your Order History</h4>
     <div id="ordersList"></div>
   </div>
 
+  <!-- Professional Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>Anand Imitations</h4>
+        <p style="font-size:0.85rem; color:#d4cbc5; margin-bottom:14px;">Bringing exquisite temple jewellery, uncut kundan, and 92.5 silver craftsmanship directly to your doorstep.</p>
+        <p style="font-size:0.85rem; color:var(--gold-light);">Helpline WhatsApp: +91 87428 18004</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Collections</h4>
+        <ul>
+          <li><a onclick="filterCategory('Necklace', null)">Necklace Sets</a></li>
+          <li><a onclick="filterCategory('Earrings', null)">Earrings & Jhumkas</a></li>
+          <li><a onclick="filterCategory('92.5 Silver', null)">92.5 Sterling Silver</a></li>
+          <li><a onclick="filterCategory('Rings', null)">Designer Rings</a></li>
+          <li><a onclick="filterCategory('Mangalsutra', null)">Mangalsutra</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a onclick="openProfileModal()">Track Orders</a></li>
+          <li><a href="#">Shipping & Returns Policy</a></li>
+          <li><a href="#">Jewellery Care Guide</a></li>
+          <li><a href="#">Contact Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit & Connect</h4>
+        <p style="font-size:0.85rem; color:#d4cbc5; margin-bottom:10px;">Flagship Studio: Bengaluru, India</p>
+        <p style="font-size:0.85rem; color:#d4cbc5;">Email: support@anandimitations.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Anand Imitations. All Rights Reserved.</p>
+      <p>Secure SSL Encrypted Transactions & Automated Inventory Control</p>
+    </div>
+  </footer>
+
   <script>
     // =========================================================
-    // SUPABASE KEYS
+    // SUPABASE CONFIGURATION KEYS
     // =========================================================
     const SUPABASE_URL = 'https://utkzchhafikihonkeqlr.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_tMen2UT4d4NHM1TTWmb81g_hvbgr75y';
     // =========================================================
 
     const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    let PRODUCTS = [], activeCategory = 'All';
-    let cart = JSON.parse(localStorage.getItem('kushals_cart') || '[]');
-    let orders = JSON.parse(localStorage.getItem('kushals_orders') || '[]');
+    let PRODUCTS = [], activeCategory = 'All', activeSubCategory = '';
+    let cart = JSON.parse(localStorage.getItem('anand_cart') || '[]');
+    let wishlist = JSON.parse(localStorage.getItem('anand_wishlist') || '[]');
+    let orders = JSON.parse(localStorage.getItem('anand_orders') || '[]');
 
     async function loadCatalog() {
       const { data, error } = await db.from('products').select('*').eq('in_stock', true);
       if (error) {
-        document.getElementById('productGrid').innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        document.getElementById('productGrid').innerHTML = `<p style="color:red;">Error loading catalog: ${error.message}</p>`;
         return;
       }
       PRODUCTS = data.map(item => ({ ...item, img: item.image_url, desc: item.description }));
@@ -183,55 +354,141 @@
     }
 
     function saveState() {
-      localStorage.setItem('kushals_cart', JSON.stringify(cart));
-      localStorage.setItem('kushals_orders', JSON.stringify(orders));
+      localStorage.setItem('anand_cart', JSON.stringify(cart));
+      localStorage.setItem('anand_wishlist', JSON.stringify(wishlist));
+      localStorage.setItem('anand_orders', JSON.stringify(orders));
       document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById('wishlistCount').textContent = wishlist.length;
       document.getElementById('orderCount').textContent = orders.length;
     }
 
     function filterCategory(cat, el) {
       activeCategory = cat;
+      activeSubCategory = '';
       document.querySelectorAll('.pill, nav a').forEach(n => n.classList.remove('active'));
       if (el) el.classList.add('active');
+      document.getElementById('catalogTitle').textContent = cat === 'All' ? 'Curated Royal Collections' : `${cat} Collection`;
+      renderProducts();
+    }
+
+    function filterSubCategory(subCat) {
+      activeSubCategory = subCat;
+      document.getElementById('catalogTitle').textContent = `${subCat}`;
       renderProducts();
     }
 
     function renderProducts() {
       const query = document.getElementById('searchInput').value.toLowerCase();
       const sort = document.getElementById('sortSelect').value;
-      let filtered = PRODUCTS.filter(p => (activeCategory === 'All' || p.category === activeCategory) && p.title.toLowerCase().includes(query));
+      
+      let filtered = PRODUCTS.filter(p => {
+        const matchesCat = (activeCategory === 'All' || p.category === activeCategory);
+        const matchesSub = (!activeSubCategory || (p.title && p.title.toLowerCase().includes(activeSubCategory.toLowerCase())) || (p.badge && p.badge.toLowerCase().includes(activeSubCategory.toLowerCase())));
+        const matchesQuery = p.title.toLowerCase().includes(query);
+        return matchesCat && matchesSub && matchesQuery;
+      });
+
       if (sort === 'low') filtered.sort((a, b) => a.price - b.price);
       if (sort === 'high') filtered.sort((a, b) => b.price - a.price);
-      document.getElementById('productGrid').innerHTML = filtered.map(p => `
+
+      const grid = document.getElementById('productGrid');
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; padding: 40px; color:var(--muted);">No jewellery pieces found in this category.</p>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const isWished = wishlist.some(w => w.id === p.id);
+        return `
         <article class="product-card">
-          <div class="product-media" onclick="openPreview(${p.id})"><span class="tag-badge">${p.badge || 'New'}</span><img src="${p.img}" alt="${p.title}" /></div>
-          <div class="product-info">
-            <div><div class="product-meta">${p.category}</div><h3 class="product-title">${p.title}</h3>
-            <div class="price-row"><span class="price">₹${p.price.toLocaleString('en-IN')}</span><span class="mrp">₹${p.mrp.toLocaleString('en-IN')}</span></div></div>
-            <div class="card-actions"><button class="btn-outline" onclick="openPreview(${p.id})">Quick View</button><button class="btn-solid" onclick="addToCart(${p.id})">Add to Bag</button></div>
+          <div class="product-media" onclick="openPreview(${p.id})">
+            <span class="tag-badge">${p.badge || 'New'}</span>
+            <button class="wishlist-btn ${isWished ? 'active' : ''}" onclick="event.stopPropagation(); toggleWishlist(${p.id})">♥</button>
+            <img src="${p.img}" alt="${p.title}" />
           </div>
-        </article>`).join('');
+          <div class="product-info">
+            <div>
+              <div class="product-meta">${p.category}</div>
+              <h3 class="product-title">${p.title}</h3>
+              <div class="price-row">
+                <span class="price">₹${p.price.toLocaleString('en-IN')}</span>
+                <span class="mrp">₹${p.mrp.toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn-outline" onclick="openPreview(${p.id})">Quick View</button>
+              <button class="btn-solid" onclick="addToCart(${p.id})">Add to Bag</button>
+            </div>
+          </div>
+        </article>`;
+      }).join('');
     }
 
     function openPreview(id) {
       const p = PRODUCTS.find(item => item.id === id);
+      if (!p) return;
       document.getElementById('previewContent').innerHTML = `
         <div class="modal-grid">
           <img src="${p.img}" style="width:100%; aspect-ratio:4/5; object-fit:cover;" />
-          <div><span class="product-meta">${p.category}</span><h2 style="font-family:var(--serif); color:var(--maroon); margin:6px 0;">${p.title}</h2>
-          <div class="price-row"><span class="price" style="font-size:1.3rem;">₹${p.price.toLocaleString('en-IN')}</span><span class="mrp">₹${p.mrp.toLocaleString('en-IN')}</span></div>
-          <p style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;">${p.desc || ''}</p>
-          <button class="btn-solid" style="width:100%; padding:14px;" onclick="addToCart(${p.id}); closeAllOverlays(); toggleCart(true);">Add to Bag</button></div>
+          <div>
+            <span class="product-meta">${p.category}</span>
+            <h2 style="font-family:var(--serif); color:var(--maroon); margin:6px 0; font-size:1.6rem;">${p.title}</h2>
+            <div class="price-row" style="margin:12px 0;">
+              <span class="price" style="font-size:1.4rem;">₹${p.price.toLocaleString('en-IN')}</span>
+              <span class="mrp" style="font-size:1rem;">₹${p.mrp.toLocaleString('en-IN')}</span>
+            </div>
+            <p style="font-size:0.88rem; color:var(--muted); margin-bottom:16px; line-height:1.6;">${p.desc || 'Handcrafted masterpiece with premium antique gold matte finish and exquisite stonework.'}</p>
+            <div style="font-size:0.82rem; margin-bottom:16px; color:var(--maroon);"><strong>Finish:</strong> ${p.finish || 'Standard Matte Gold'}</div>
+            <button class="btn-solid" style="width:100%; padding:14px;" onclick="addToCart(${p.id}); closeAllOverlays(); toggleCart(true);">Add to Bag</button>
+          </div>
         </div>`;
       document.getElementById('overlay').classList.add('open');
       document.getElementById('previewModal').classList.add('open');
     }
 
+    function toggleWishlist(id) {
+      const idx = wishlist.findIndex(w => w.id === id);
+      if (idx > -1) {
+        wishlist.splice(idx, 1);
+      } else {
+        const prod = PRODUCTS.find(p => p.id === id);
+        if (prod) wishlist.push({ id: prod.id, title: prod.title, price: prod.price, img: prod.img });
+      }
+      saveState();
+      renderProducts();
+    }
+
+    function openWishlistDrawer() {
+      closeAllOverlays();
+      const container = document.getElementById('wishlistItems');
+      if (wishlist.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:40px;">Your wishlist is empty.</p>`;
+      } else {
+        container.innerHTML = wishlist.map(item => `
+          <div class="cart-item">
+            <img src="${item.img}" />
+            <div style="flex:1;">
+              <div style="font-size:0.88rem; font-weight:600;">${item.title}</div>
+              <div style="color:var(--maroon); font-weight:600; margin:4px 0;">₹${item.price.toLocaleString('en-IN')}</div>
+              <button class="btn-solid" style="padding:4px 10px; font-size:0.7rem;" onclick="addToCart(${item.id}); toggleWishlist(${item.id});">Move to Bag</button>
+            </div>
+            <button class="icon-btn" onclick="toggleWishlist(${item.id})">✕</button>
+          </div>`).join('');
+      }
+      document.getElementById('overlay').classList.add('open');
+      document.getElementById('wishlistDrawer').classList.add('open');
+    }
+
     function addToCart(id) {
       const existing = cart.find(c => c.id === id);
       if (existing) existing.qty += 1;
-      else { const prod = PRODUCTS.find(p => p.id === id); cart.push({ id: prod.id, title: prod.title, price: prod.price, img: prod.img, qty: 1 }); }
-      saveState(); renderCart(); toggleCart(true);
+      else {
+        const prod = PRODUCTS.find(p => p.id === id);
+        if (prod) cart.push({ id: prod.id, title: prod.title, price: prod.price, img: prod.img, qty: 1 });
+      }
+      saveState();
+      renderCart();
+      toggleCart(true);
     }
 
     function updateQty(id, delta) {
@@ -239,28 +496,57 @@
       if (!item) return;
       item.qty += delta;
       if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
-      saveState(); renderCart();
+      saveState();
+      renderCart();
     }
 
     function renderCart() {
       const container = document.getElementById('cartItems');
-      if (cart.length === 0) { container.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:40px;">Your bag is empty.</p>`; document.getElementById('cartTotal').textContent = '₹0'; return; }
+      if (cart.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:var(--muted); margin-top:40px;">Your bag is empty.</p>`;
+        document.getElementById('cartTotal').textContent = '₹0';
+        return;
+      }
       let total = 0;
       container.innerHTML = cart.map(item => {
         total += item.price * item.qty;
-        return `<div class="cart-item"><img src="${item.img}" /><div style="flex:1;"><div>${item.title}</div><div style="color:var(--maroon); font-weight:600;">₹${(item.price * item.qty).toLocaleString('en-IN')}</div>
-        <div class="qty-controls"><button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button><span>${item.qty}</span><button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button></div></div></div>`;
+        return `
+          <div class="cart-item">
+            <img src="${item.img}" />
+            <div style="flex:1;">
+              <div style="font-size:0.85rem; font-weight:500;">${item.title}</div>
+              <div style="color:var(--maroon); font-weight:600; font-size:0.9rem;">₹${(item.price * item.qty).toLocaleString('en-IN')}</div>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                <span>${item.qty}</span>
+                <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+              </div>
+            </div>
+          </div>`;
       }).join('');
       document.getElementById('cartTotal').textContent = '₹' + total.toLocaleString('en-IN');
     }
 
-    function toggleCart(open) { closeAllOverlays(); if (open) { renderCart(); document.getElementById('overlay').classList.add('open'); document.getElementById('cartDrawer').classList.add('open'); } }
-    function openCheckoutModal() { if (cart.length === 0) return alert('Bag is empty.'); closeAllOverlays(); document.getElementById('overlay').classList.add('open'); document.getElementById('checkoutModal').classList.add('open'); }
+    function toggleCart(open) {
+      closeAllOverlays();
+      if (open) {
+        renderCart();
+        document.getElementById('overlay').classList.add('open');
+        document.getElementById('cartDrawer').classList.add('open');
+      }
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) return alert('Your shopping bag is empty.');
+      closeAllOverlays();
+      document.getElementById('overlay').classList.add('open');
+      document.getElementById('checkoutModal').classList.add('open');
+    }
 
     async function submitOrder(e) {
       e.preventDefault();
       const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-      const orderNumber = 'KSH-' + Math.floor(100000 + Math.random() * 900000);
+      const orderNumber = 'ANAND-' + Math.floor(100000 + Math.random() * 900000);
       
       const orderPayload = { 
         order_number: orderNumber, 
@@ -273,11 +559,9 @@
         status: 'Confirmed' 
       };
 
-      // 1. Save order to Supabase
       const { error } = await db.from('orders').insert([orderPayload]);
       if (error) return alert('Order Error: ' + error.message);
 
-      // 2. Mark sold items as out of stock (in_stock = false) in Supabase
       for (const item of cart) {
         await db.from('products').update({ in_stock: false }).eq('id', item.id);
       }
@@ -296,19 +580,38 @@
       cart = []; 
       saveState(); 
       e.target.reset(); 
-      openOrdersModal();
-      loadCatalog(); // Reload catalog to instantly hide sold items!
+      openProfileModal();
+      loadCatalog();
     }
 
-    function openOrdersModal() {
+    function openProfileModal() {
       closeAllOverlays();
-      document.getElementById('ordersList').innerHTML = orders.length === 0 ? `<p>No orders yet.</p>` : orders.map(o => `<div style="border:1px solid var(--border); padding:14px; margin-bottom:10px; background:var(--cream);"><strong>#${o.orderId}</strong> — ₹${o.total.toLocaleString('en-IN')} (${o.status})<br><small>${o.customer} • ${o.address}</small></div>`).join('');
+      const list = document.getElementById('ordersList');
+      if (orders.length === 0) {
+        list.innerHTML = `<p style="font-size:0.85rem; color:var(--muted);">No orders placed yet. Place your first test order to track it here!</p>`;
+      } else {
+        list.innerHTML = orders.map(o => `
+          <div style="border:1px solid var(--border); padding:14px; margin-bottom:12px; background:var(--cream); border-radius:4px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <strong>Order #${o.orderId}</strong>
+              <span style="color:var(--maroon); font-weight:600;">₹${o.total.toLocaleString('en-IN')}</span>
+            </div>
+            <p style="font-size:0.8rem; color:var(--muted);">Status: <span style="color:green; font-weight:600;">${o.status}</span> • Date: ${o.date}</p>
+            <p style="font-size:0.8rem; color:var(--muted);">Ship to: ${o.customer}, ${o.address}</p>
+          </div>`).join('');
+      }
       document.getElementById('overlay').classList.add('open');
-      document.getElementById('ordersModal').classList.add('open');
+      document.getElementById('profileModal').classList.add('open');
     }
 
-    function closeAllOverlays() { ['overlay','cartDrawer','previewModal','checkoutModal','ordersModal'].forEach(id => document.getElementById(id).classList.remove('open')); }
-    saveState(); loadCatalog();
+    function closeAllOverlays() {
+      ['overlay', 'cartDrawer', 'wishlistDrawer', 'previewModal', 'checkoutModal', 'profileModal'].forEach(id => {
+        document.getElementById(id).classList.remove('open');
+      });
+    }
+
+    saveState();
+    loadCatalog();
   </script>
 </body>
 </html>
